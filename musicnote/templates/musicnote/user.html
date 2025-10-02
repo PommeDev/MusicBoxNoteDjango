@@ -1,0 +1,153 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'musicnote/stylereview.css' %}">
+    <link rel="stylesheet" href="{% static 'musicnote/stylemusic.css' %}">
+    <link rel="stylesheet" href="{% static 'musicnote/basestyle.css' %}">
+    <link rel="stylesheet" href="{% static 'musicnote/userstyle.css' %}">
+    <link rel="stylesheet" href="{% static 'musicnote/Menu/style.css' %}">
+    <title>{{ userData.username }}</title>
+</head>
+<body>
+    <canvas id="space-background"></canvas>
+
+    <!-- Loader overlay -->
+    <div id="loader" style="position: fixed; top:0; left:0; width:100%; height:100%; 
+    background-color: rgba(0,0,0,0.9); display:flex; justify-content:center; align-items:center; z-index:9999;">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Contenu de la page -->
+    <div id="page-content" style="display: none;">
+        
+
+
+        <header>
+        <div class="container">
+            <div class="logo">MusicNote</div>
+            <nav>
+            <ul class="nav-links">
+                <li><a href="{% url 'musicnote:home' %}">Accueil</a></li>
+                <li><a href="{% url 'musicnote:index' %}">Rechercher</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'musicnote:user' user.pk %}">Ma page</a></li>
+                <li><a href="{% url 'musicnote:logout' %}">Se déconnecter</a></li>
+                <li class="nav-user">{{ user }}</li>
+                {% else %}
+                <li><a href="{% url 'musicnote:login' %}">Se connecter</a></li>
+                {% endif %}
+            </ul>
+            <!-- Hamburger -->
+            <div id="nav-icon1">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            </nav>
+        </div>
+    </header>
+
+
+
+
+        {% if  is_owner %}
+        <h1>Bravo c'est ta page</h1>
+        {% endif %}
+
+
+        <h1>{{ userData.username }}</h1>
+
+    <h2>Reviews</h2>
+
+        <ul id="top-reviews-section">
+            {% for review in reviews %}
+                <li class="to-hover">
+                    <div class="user-container">
+                        <a href={% url 'musicnote:song' review.song.id %}>
+                        <!-- Bloc 1 : Photo + Nom -->
+                            <div class="user-info">
+                                <img src="{{ review.song.cover}}" alt="Cover">
+                                <div class="user-name">{{ review.song.name }}</div>
+                            </div>
+                        </a>
+                        <!-- Séparateur vertical -->
+                        <div class="vertical-line"></div>
+
+                        <!-- Bloc 2 : Commentaire -->
+                        <div class="comment-content" id="comment_write">
+                            {{ review.comment }}
+
+                        </div>
+
+                        <!-- Bloc 3 : Étoiles -->
+                        <div class="rating-block">
+                            <div class="star-rating" data-rating="{{ review.note }}">
+                                <div class="stars-outer">
+                                    <div class="stars-inner"></div>
+                                </div>
+                            </div>
+                            <p class="date">
+                                {{ review.created_at }}
+                            </p>
+                        </div>
+                    </div>
+                </li>
+
+
+            {% endfor %}
+        </ul>
+    </div>
+        
+
+
+    <script src="{% static 'musicnote/scriptreview.js' %}"></script>
+    <script src="{% static 'musicnote/scriptmusic.js' %}"></script>
+    <script src="{% static 'musicnote/space.js' %}"></script>
+    <script src="{% static 'musicnote/userscript.js' %}"></script>
+
+
+
+        <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+        <script>
+            window.addEventListener('load', function() {
+                // Masquer loader et montrer le contenu
+                document.getElementById('loader').style.display = 'none';
+                document.getElementById('page-content').style.display = 'block';
+
+                // Initialiser Masonry
+                const grid = document.querySelector('#top-reviews-section');
+                if(grid){
+                    new Masonry(grid, {
+                        itemSelector: '.to-hover',
+                        columnWidth: 200,
+                        gutter: 15,
+                        fitWidth: true
+                    });
+                }
+
+                // Initialiser étoiles
+                document.querySelectorAll(".star-rating").forEach(star => {
+                    const rating = parseFloat(star.getAttribute("data-rating")) || 0;
+                    const percentage = (rating / 10) * 100;
+                    const inner = star.querySelector(".stars-inner");
+                    if(inner) inner.style.width = `${percentage}%`;
+                });
+            });
+        </script>
+
+
+
+
+
+
+
+
+</body>
+
+
+</html>
+

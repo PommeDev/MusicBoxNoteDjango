@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+</head>
+<body>
+
+    <form>
+    <input type="text" id="search" placeholder="Recherche une chanson...">
+    <ul id="results"></ul>
+
+    <script>
+    document.getElementById('search').addEventListener('input', function() {
+        const query = this.value;
+
+        if (query.length < 2) return;  // Attendre un peu pour éviter le spam
+
+        fetch(`/musicnote/search/?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                const resultsList = document.getElementById('results');
+                resultsList.innerHTML = '';
+
+                if (data.tracks.length === 0) {
+                    resultsList.innerHTML = '<li>Aucun résultat</li>';
+                } else {
+                    data.tracks.forEach(track => {
+                        resultsList.innerHTML += `<li>${track.title} - ${track.artist.name}</li>`;
+                    });
+                }
+            });
+    });
+    </script>
+    </form>
+
+</body>
+</html>
+

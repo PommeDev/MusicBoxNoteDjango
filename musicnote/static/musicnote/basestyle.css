@@ -1,0 +1,201 @@
+:root {
+    /* Couleur principale (titres, boutons) */
+    --color-primary: #6C63FF;       /* violet moderne, doux et lumineux */
+
+    /* Couleur secondaire (accent, hover, boutons secondaires) */
+    --color-secondary: #FF6B6B;     /* rouge/orange vif mais élégant */
+
+    /* Couleur tierce (éléments secondaires, icons) */
+    --color-tierce: #4DB6AC;        /* vert/bleu pastel moderne */
+
+    /* Seconde tierce (alertes, accents subtils) */
+    --color-seco-tierce: #FFA500;   /* orange doux et moderne */
+
+    /* Ombres / overlays / transparences */
+    --color-shade: rgba(77,182,172,0.35); /* vert/bleu pastel translucide */
+
+    /* Fond principal */
+    --color-background: #121212;    /* très sombre, style moderne “dark mode” */
+
+    /* Texte principal */
+    --color-text: #E0E0E0;          /* gris clair pour lisibilité maximale */
+
+    /* Fond clair pour sections / containers */
+    --color-background-text: #1E1E1E; /* gris foncé, contraste doux avec le fond */
+    
+    /* Couleurs halo / audio */
+    --halo-main: var(--color-primary);
+    --halo-secondary: var(--color-secondary);
+    --halo-light: var(--color-text);
+}
+
+
+/* --- BASE --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-background);
+    margin: 0;
+    padding: 0;
+    color: var(--color-text);
+}
+
+/* Conteneur général pour tout le contenu */
+.containerMain {
+    max-width: 800px;    /* largeur fixe */
+    margin: 0 auto;      /* centre la colonne principale mais le contenu interne reste aligné à gauche */
+    padding: 20px;
+}
+
+/* --- TITRES --- */
+h1, h2, h3 {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+
+h1{
+    margin-top: 70px;
+}
+
+h2{
+    color: var(--color-seco-tierce);
+}
+
+h3{
+    color: var(--color-secondary)
+}
+
+
+/* --- AUDIO CONTROLLER --- */
+
+
+button {
+    background-color: var(--color-secondary);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+button:hover {
+    background-color: var(--color-secondary);
+    filter: brightness(90%);
+}
+
+/* --- REVIEW LIST --- */
+
+
+/* --- FORMS --- */
+form {
+    background-color: var(--color-tierce);
+    filter: brightness(90%);
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px var(--color-shade);
+}
+
+input[type="text"],
+input[type="number"],
+input[type="range"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--color-tierce);
+    box-sizing: border-box;
+    background-color: var(--color-text);
+    
+}
+
+form button {
+    width: 100%;
+}
+
+
+.range-container{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.range-container input[type="range"] {
+  flex: 1; /* prend tout l’espace dispo */
+}
+
+.range-container output {
+    display: inline-block;
+    min-width: 2.5em;        /* largeur fixe pour que ça ne bouge pas */
+    padding: 4px 6px;
+    border-radius: 6px;
+    background-color: var(--color-text);
+    border: 1px solid var(--color-tierce);
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: var(--color-tierce);
+    line-height: 1;       /* recentre le texte verticalement */
+    position: relative;
+    top: -4px;
+}
+/* --- MESSAGES --- */
+.messages li {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+
+/* ---- Background ------ */
+/* Canvas en arrière-plan */
+#space-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* derrière tout le contenu */
+    background: var(--color-background);
+}
+
+a{
+    cursor: default;
+    text-decoration: none;
+    color: inherit;          
+}
+
+
+
+
+/* Overlay qui couvre toute la page */
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(66,54,41,0.95); /* semi-transparent */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Spinner */
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #D64933;
+    border-top: 6px solid #712F79;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

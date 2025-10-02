@@ -1,0 +1,156 @@
+:root {
+    /* Couleur principale (titres, boutons) */
+    --color-primary: #6C63FF;       /* violet moderne, doux et lumineux */
+
+    /* Couleur secondaire (accent, hover, boutons secondaires) */
+    --color-secondary: #FF6B6B;     /* rouge/orange vif mais élégant */
+
+    /* Couleur tierce (éléments secondaires, icons) */
+    --color-tierce: #4DB6AC;        /* vert/bleu pastel moderne */
+
+    /* Seconde tierce (alertes, accents subtils) */
+    --color-seco-tierce: #FFA500;   /* orange doux et moderne */
+
+    /* Ombres / overlays / transparences */
+    --color-shade: rgba(77,182,172,0.35); /* vert/bleu pastel translucide */
+
+    /* Fond principal */
+    --color-background: #121212;    /* très sombre, style moderne “dark mode” */
+
+    /* Texte principal */
+    --color-text: #E0E0E0;          /* gris clair pour lisibilité maximale */
+
+    /* Fond clair pour sections / containers */
+    --color-background-text: #1E1E1E; /* gris foncé, contraste doux avec le fond */
+    
+    /* Couleurs halo / audio */
+    --halo-main: var(--color-primary);
+    --halo-secondary: var(--color-secondary);
+    --halo-light: var(--color-text);
+}
+
+
+
+
+
+.audio-section-wrapper {
+    display: flex;
+    align-items: center;   /* centre verticalement */
+    gap: 20px;             /* espace entre les deux blocs */
+    margin-top: 20px;
+    color: var(--color-secondary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+
+.rating-container {
+    display: flex;          /* flex pour mettre les enfants sur la même ligne */
+    align-items: center;    /* centre verticalement label + étoiles */
+    gap: 8px;               /* espace entre label et étoiles */
+}
+
+.rating-label {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--color-seco-tierce);
+}
+
+
+#user-review{
+    position: relative;
+    overflow: hidden;
+}
+
+
+/* reflet métallique animé */
+#user-review::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -50%;           /* départ hors de l’élément */
+    width: 200%;           /* suffisamment large pour traverser */
+    height: 100%;          /* couvre toute la hauteur */
+    background: linear-gradient(
+        120deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.4) 50%,
+        rgba(255,255,255,0) 100%
+    );
+    transform: skewX(-25deg); /* angle du reflet */
+    pointer-events: none;
+    animation: shine 6s infinite ease-in-out;
+}
+
+@keyframes shine {
+    0% {
+        transform: skewX(-25deg) translateX(-100%);
+    }
+    50% {
+        transform: skewX(-25deg) translateX(100%);
+    }
+    100% {
+        transform: skewX(-25deg) translateX(-100%);
+    }
+}
+
+
+.audio_info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 20px 25px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.08);     /* fond semi-transparent léger */
+    backdrop-filter: blur(12px);               /* flou du fond */
+    -webkit-backdrop-filter: blur(12px);       /* compatibilité Safari */
+    border: 1px solid rgba(255, 255, 255, 0.2);/* bordure subtile */
+    max-width: 320px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12); /* profondeur douce */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* reflet lumineux élégant et subtil */
+.audio_info::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0.12) 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: skewX(-20deg);
+    pointer-events: none;
+}
+
+
+#background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(40px); /* flou intense */
+    z-index: -2; /* derrière le contenu */
+}
+
+
+#background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1; /* entre background et contenu */
+}
+

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+
+
+{% load static %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'musicnote/stylereview.css' %}">
+    <link rel="stylesheet" href="{% static 'musicnote/stylemusic.css' %}">
+    <link rel="stylesheet" href="{% static 'musicnote/basestyle.css' %}">
+    <link rel="stylesheet" href="{% static 'musicnote/songstyle.css' %}">
+    <link rel="stylesheet" href="{% static 'musicnote/Menu/style.css' %}">
+
+    <title>{{ songData.name }}</title>
+</head>
+<body>
+
+
+
+    <div id="loader" style="position: fixed; top:0; left:0; width:100%; height:100%; 
+    background-color: rgba(0,0,0,0.9); display:flex; justify-content:center; align-items:center; z-index:9999;">
+    <div class="spinner"></div>
+    </div>
+
+    <!-- Contenu de la page -->
+    <div id="page-content" style="display: none;">
+    <div id="background-container"></div>
+        
+    <header>
+        <div class="container">
+            <div class="logo">MusicNote</div>
+            <nav>
+            <ul class="nav-links">
+                <li><a href="{% url 'musicnote:home' %}">Accueil</a></li>
+                <li><a href="{% url 'musicnote:index' %}">Rechercher</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'musicnote:user' user.pk %}">Ma page</a></li>
+                <li><a href="{% url 'musicnote:logout' %}">Se déconnecter</a></li>
+                <li class="nav-user">{{ user }}</li>
+                {% else %}
+                <li><a href="{% url 'musicnote:login' %}">Se connecter</a></li>
+                {% endif %}
+            </ul>
+            <!-- Hamburger -->
+            <div id="nav-icon1">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            </nav>
+        </div>
+    </header>
+
+
+        <div class="containerMain">
+            <h1>{{ songData.name }}</h1>
+
+
+            
+            <div class="audio-section-wrapper">
+                <div class="audio_controller" id="audio-section">
+                    <img id='cover-image' src="{{ songData.cover}}" alt="" crossOrigin="anonymous">
+                    <audio id="my-audio">
+                    <source src="{% url 'musicnote:audio_proxy' id %}" type="audio/mpeg">
+                    </audio>
+                    <button id="button-play" aria-label="Play/Pause">
+                    <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="40" height="40">
+                                <polygon points="6,4 20,12 6,20" />
+                    </svg>
+                    <!-- SVG Pause (2 barres), caché par défaut -->
+                    <svg id="icon-pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="40" height="40" style="display:none;">
+                        <rect x="6" y="4" width="4" height="16" />
+                        <rect x="14" y="4" width="4" height="16" />
+                    </svg>
+
+                    </button>
+
+                </div>
+
+                <div class="audio_info">
+                    <p id="artist">{{ songData.artist.name }}</p>
+                    <p id ="album">{{ songData.album.name}}</p>
+                    {% if  note_mean %}
+                    <div class="rating-container">
+                        <span class="rating-label">Note des utilisateurs :</span>
+                        <div class="star-rating" data-rating="{{ note_mean }}">
+                            <div class="stars-outer">
+                                <div class="stars-inner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    
+                </div>
+            </div>
+
+
+
+
+            <div id="user-review-section"> 
+                {% if user_review  %}
+                    <h2>Votre Review</h2>
+
+                        <li class="review" id="user-review">
+                            <div class="user-container">
+                                <!-- Bloc 1 : Photo + Nom -->
+                                <a href={% url 'musicnote:user' user_review.user.id %}>
+                                    <div class="user-info">
+                                        <img src="{% static "musicnote/profile.png" %}" alt="Photo de profil">
+                                        <div class="user-name">{{ user_review.user.username }}</div>
+                                    </div>
+                                </a>
+                                <!-- Séparateur vertical -->
+                                <div class="vertical-line"></div>
+
+                                <!-- Bloc 2 : Commentaire -->
+                                <div class="comment-content" id="comment_write">
+                                    {{ user_review.comment }}
+
+                                </div>
+
+                                <!-- Bloc 3 : Étoiles -->
+                                <div class="rating-block">
+                                    <div class="star-rating" data-rating="{{ user_review.note }}">
+                                        <div class="stars-outer">
+                                            <div class="stars-inner"></div>
+                                        </div>
+                                    </div>
+                                    <p class="date">
+                                        {{ user_review.created_at }}
+                                    </p>
+                                </div>
+                            </div>
+                        </li>
+
+
+                    <!-- Bouton de modification -->
+                    <h3>Modifier votre review</h3>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <input type="text" name="comment" value="{{ user_review.comment }}" required>
+                        <div class="range-container">
+                            <input type="range" name="note" min="0" max="10" step="1" value={{ user_review.note }} oninput="this.nextElementSibling.value = this.value" required>    
+                            <output>{{user_review.note}}</output>
+                        </div>
+                        <button type="submit">Modifier</button>
+                    </form>
+
+                    <!-- Bouton de suppression -->
+                    <form action="{% url 'musicnote:delete_review' user_review.id %}" method="post" style="margin-top:10px;">
+                        {% csrf_token %}
+                        <button type="submit" onclick="return confirm('Confirmer la suppression ?')">Supprimer</button>
+                    </form>
+                    
+                
+                
+                {% else %}
+
+                    <h2>Ajoute une review</h2>
+
+                    <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="text" name="comment" placeholder="Votre commentaire" required>
+                    <div class='range-container'>
+                        <input type="range" name="note" min="0" max="10" step="1" value='5' oninput="this.nextElementSibling.value = this.value" required>    
+                        <output>5</output>
+                    </div>
+                    <button type="submit" >Post</button>
+
+                    </form>
+
+
+
+
+
+
+                {% endif %}
+            </div>
+
+
+
+            <div id="top-reviews-section">
+
+
+                <h2>Top Reviews</h2>
+                {% if reviews_b %}
+                <h3>Better</h3>
+                <ul>
+
+                
+
+                {% for review in reviews_b %}
+
+                <li class="review">
+                        <div class="user-container">
+                            <!-- Bloc 1 : Photo + Nom -->
+                            <a href={% url 'musicnote:user' review.user.id %}>
+                                <div class="user-info">
+                                    <img src="{% static "musicnote/profile.png" %}" alt="Photo de profil">
+                                    <div class="user-name">{{ review.user.username }}</div>
+                                </div>
+                            </a>
+                            <!-- Séparateur vertical -->
+                            <div class="vertical-line"></div>
+
+                            <!-- Bloc 2 : Commentaire -->
+                            <div class="comment-content" id="comment_write">
+                                {{ review.comment }}
+
+                            </div>
+
+                            <!-- Bloc 3 : Étoiles -->
+                            <div class="rating-block">
+                                <div class="star-rating" data-rating="{{ review.note }}">
+                                    <div class="stars-outer">
+                                        <div class="stars-inner"></div>
+                                    </div>
+                                </div>
+                                <p class="date">
+                                    {{ review.created_at }}
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+
+
+
+                {% endfor %}
+
+                </ul>
+                {% endif %}
+
+
+                {% if  reviews_w%}
+                <h3>Worst</h3>
+                <ul>
+                {% for review in reviews_w %}
+                    <li class="review">
+                        <div class="user-container">
+                            <!-- Bloc 1 : Photo + Nom -->
+                            <a href={% url 'musicnote:user' review.user.id %}>
+                                <div class="user-info">
+                                    <img src="{% static "musicnote/profile.png" %}" alt="Photo de profil">
+                                    <div class="user-name">{{ review.user.username }}</div>
+                                </div>
+                            </a>
+
+                            <!-- Séparateur vertical -->
+                            <div class="vertical-line"></div>
+
+                            <!-- Bloc 2 : Commentaire -->
+                            <div class="comment-content" id="comment_write">
+                                {{ review.comment }}
+
+                            </div>
+
+                            <!-- Bloc 3 : Étoiles -->
+                            <div class="rating-block">
+                                <div class="star-rating" data-rating="{{ review.note }}">
+                                    <div class="stars-outer">
+                                        <div class="stars-inner"></div>
+                                    </div>
+                                </div>
+                                <p class="date">
+                                    {{ review.created_at }}
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    
+
+                {% endfor %}
+
+                </ul>
+                {% endif %}
+            </div>
+
+
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
+    <script>
+        window.addEventListener('load', function() {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('page-content').style.display = 'block';
+        });
+
+
+
+    </script>
+
+
+    <script src="{% static 'musicnote/scriptreview.js' %}"></script>
+    <script src="{% static 'musicnote/scriptmusic.js' %}"></script>
+    <script src="{% static 'musicnote/songscript.js' %}"></script>
+    <script src="{% static 'musicnote/Menu/script.js' %}"></script>
+
+</body>
+
+
+
+</html>

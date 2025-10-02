@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'musicnote/basestyle.css' %}">
+    <link rel="stylesheet" href="{% static 'musicnote/searchstyle.css' %}">
+    <link rel="stylesheet" href="{% static 'musicnote/Menu/style.css' %}">
+    <title>Main Page</title>
+</head>
+<body>
+
+    <canvas id="space-background"></canvas>
+
+    <header>
+        <div class="container">
+            <div class="logo">MusicNote</div>
+            <nav>
+            <ul class="nav-links">
+                <li><a href="{% url 'musicnote:home' %}">Accueil</a></li>
+                <li><a href="{% url 'musicnote:index' %}">Rechercher</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'musicnote:user' user.pk %}">Ma page</a></li>
+                <li><a href="{% url 'musicnote:logout' %}">Se déconnecter</a></li>
+                <li class="nav-user">{{ user }}</li>
+                {% else %}
+                <li><a href="{% url 'musicnote:login' %}">Se connecter</a></li>
+                {% endif %}
+            </ul>
+            <!-- Hamburger -->
+            <div id="nav-icon1">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            </nav>
+        </div>
+    </header>
+
+
+    
+
+    <h1>Cherche un son</h1>
+
+    <h1>---------------------------------------</h1>
+
+    <h1>Recherche de morceaux Deezer 🎵</h1>
+    <form>
+    <input type="text" id="search" placeholder="Tape un nom de chanson ou artiste...">
+    </form>
+    <ul id="results">
+        <li class="no-result">Commence à taper pour voir des résultats...</li>
+    </ul>
+
+    <script>
+        const searchInput = document.getElementById('search');
+        const resultsList = document.getElementById('results');
+
+        searchInput.addEventListener('input', function() {
+            const query = this.value.trim();
+
+            if (query.length < 2) {
+                resultsList.innerHTML = '<li class="no-result">Commence à taper pour voir des résultats...</li>';
+                return;
+            }
+
+            fetch(`/musicnote/search/?q=${encodeURIComponent(query)}`)
+                .then(response => {
+                    if (!response.ok) throw new Error("Erreur réseau");
+                    return response.json();
+                })
+                .then(data => {
+                    resultsList.innerHTML = '';
+
+                    if (!data.tracks || data.tracks.length === 0) {
+                        resultsList.innerHTML = '<li class="no-result">Aucun résultat</li>';
+                        return;
+                    }
+
+                    data.tracks.forEach(track => {
+                        if (track.in_data_base){
+                            const li = document.createElement('li');
+                            li.innerHTML = `
+                                <a href="/musicnote/song/${track.id}"> <strong>${track.title}</strong> – ${track.artist.name}<br> </a>
+                            `;
+                            resultsList.appendChild(li);
+                        }else{
+                            const li = document.createElement('li');
+                            li.innerHTML = `
+                                <a href="/musicnote/add_deezer_song/${track.deezer_id}">
+                                <strong>${track.title}</strong> – ${track.artist.name}
+                                </a>
+                            `;
+                            resultsList.appendChild(li);
+                        }
+
+                    });
+                })
+                .catch(error => {
+                    resultsList.innerHTML = `<li class="no-result">Erreur : ${error.message}</li>`;
+                });
+        });
+    </script>
+
+
+    
+    <script src="{% static 'musicnote/space.js' %}"></script>
+    <script src="{% static 'musicnote/Menu/script.js' %}"></script>
+
+
+
+
+
+
+
+</body>
+</html>

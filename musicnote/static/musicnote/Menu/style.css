@@ -1,0 +1,152 @@
+:root {
+    /* Couleur principale (titres, boutons) */
+    --color-primary: #6C63FF;       /* violet moderne, doux et lumineux */
+
+    /* Couleur secondaire (accent, hover, boutons secondaires) */
+    --color-secondary: #FF6B6B;     /* rouge/orange vif mais élégant */
+
+    /* Couleur tierce (éléments secondaires, icons) */
+    --color-tierce: #4DB6AC;        /* vert/bleu pastel moderne */
+
+    /* Seconde tierce (alertes, accents subtils) */
+    --color-seco-tierce: #FFA500;   /* orange doux et moderne */
+
+    /* Ombres / overlays / transparences */
+    --color-shade: rgba(77,182,172,0.35); /* vert/bleu pastel translucide */
+
+    /* Fond principal */
+    --color-background: #121212;    /* très sombre, style moderne “dark mode” */
+
+    /* Texte principal */
+    --color-text: #E0E0E0;          /* gris clair pour lisibilité maximale */
+
+    /* Fond clair pour sections / containers */
+    --color-background-text: #1E1E1E; /* gris foncé, contraste doux avec le fond */
+    
+    /* Couleurs halo / audio */
+    --halo-main: var(--color-primary);
+    --halo-secondary: var(--color-secondary);
+    --halo-light: var(--color-text);
+}
+
+
+/* Header */
+header {
+  width: 100%;
+  background: var(--color-tierce);
+  color: var(--color-text);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/* Navigation */
+nav {
+  position: relative;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-size: 1em;
+  transition: color 0.3s, background 0.3s;
+  padding: 8px 14px;
+  border-radius: 6px;
+}
+
+.nav-links li a:hover {
+  background: var(--color-primary);
+}
+
+/* Hamburger icon */
+#nav-icon1 {
+  width: 35px;
+  height: 25px;
+  position: relative;
+  cursor: pointer;
+  display: none; /* caché sur desktop */
+}
+
+#nav-icon1 span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: var(--color-text);
+  border-radius: 4px;
+  left: 0;
+  transition: 0.25s ease-in-out;
+}
+
+#nav-icon1 span:nth-child(1) { top: 0; }
+#nav-icon1 span:nth-child(2) { top: 10px; }
+#nav-icon1 span:nth-child(3) { top: 20px; }
+
+/* Animation en croix */
+#nav-icon1.open span:nth-child(1) {
+  top: 10px;
+  transform: rotate(45deg);
+}
+#nav-icon1.open span:nth-child(2) {
+  opacity: 0;
+}
+#nav-icon1.open span:nth-child(3) {
+  top: 10px;
+  transform: rotate(-45deg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #nav-icon1 {
+    display: block; /* rendu visible sur mobile */
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 0px;
+    right: 0;
+    background: var(--color-tierce);
+    flex-direction: column;
+    width: 200px;
+    display: none;
+    padding: 20px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+}
+
+
+.nav-user {
+  padding: 6px 12px;
+  background: var(--color-primary);
+  color: #fff;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  align-self: center; /* bien aligné avec les autres li */
+}

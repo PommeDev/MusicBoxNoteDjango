@@ -1,0 +1,108 @@
+:root{
+    --color-primary: #712F79;
+    --color-secondary: #D64933;
+    --color-tierce: #708D81;
+    --color-seco-tierce: #A43C56;
+    --color-shade: #708d815e;
+    --color-background: #423629;
+    --color-text: #E8E9F3;
+    --color-background-text: #53483C;
+}
+
+
+
+/* Centrer le contenu */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-tierce);
+    color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+}
+
+/* Barre de recherche */
+#search {
+    width: 400px; /* taille fixe */
+    max-width: 90%; /* responsive */
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: 2px solid var(--color-seco-tierce);
+    outline: none;
+    font-size: 16px;
+    margin-bottom: 20px;
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#search:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 8px var(--color-primary);
+}
+
+/* Liste de résultats */
+#results {
+    list-style: none;
+    padding: 0;
+    width: 400px;
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* espace entre les blocs */
+}
+
+/* Bloc résultat */
+#results li {
+    background-color: var(--color-background);
+    padding: 12px 15px;
+    border-radius: 12px;
+    border: 1px solid var(--color-secondary);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover sur bloc */
+#results li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--color-shade);
+}
+
+/* Lien dans le bloc */
+#results li a {
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: bold;
+    display: block;
+}
+
+/* Texte secondaire (ex: artiste) */
+#results li a br {
+    display: none;
+}
+#results li a span {
+    font-weight: normal;
+    font-size: 14px;
+    color: var(--color-text);
+}
+
+/* Message "aucun résultat" ou "commence à taper" */
+.no-result {
+    text-align: center;
+    color: var(--color-text);
+    font-style: italic;
+}
+
+
+#search {
+    width: 400px;
+    max-width: 90%;
+    padding: 0 15px;       /* uniquement horizontal pour contrôler la hauteur */
+    height: 40px;          /* hauteur fixe */
+    line-height: 40px;     /* centre le texte verticalement */
+    border-radius: 25px;
+    outline: none;
+    font-size: 16px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}

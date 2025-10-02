@@ -1,0 +1,220 @@
+:root {
+    /* Couleur principale (titres, boutons) */
+    --color-primary: #6C63FF;       /* violet moderne, doux et lumineux */
+
+    /* Couleur secondaire (accent, hover, boutons secondaires) */
+    --color-secondary: #FF6B6B;     /* rouge/orange vif mais élégant */
+
+    /* Couleur tierce (éléments secondaires, icons) */
+    --color-tierce: #4DB6AC;        /* vert/bleu pastel moderne */
+
+    /* Seconde tierce (alertes, accents subtils) */
+    --color-seco-tierce: #FFA500;   /* orange doux et moderne */
+
+    /* Ombres / overlays / transparences */
+    --color-shade: rgba(77,182,172,0.35); /* vert/bleu pastel translucide */
+
+    /* Fond principal */
+    --color-background: #121212;    /* très sombre, style moderne “dark mode” */
+
+    /* Texte principal */
+    --color-text: #E0E0E0;          /* gris clair pour lisibilité maximale */
+
+    /* Fond clair pour sections / containers */
+    --color-background-text: #1E1E1E; /* gris foncé, contraste doux avec le fond */
+    
+    /* Couleurs halo / audio */
+    --halo-main: var(--color-primary);
+    --halo-secondary: var(--color-secondary);
+    --halo-light: var(--color-text);
+}
+
+
+#user-data {
+    text-decoration: none;
+    color: inherit;          
+    font: inherit; 
+}
+
+.all-review{
+    cursor: default;
+}
+
+a{
+    cursor: default;
+    text-decoration: none;
+    color: inherit;          
+}
+
+
+.star-rating {
+    width: 100px; /* Ajuste selon tes besoins */
+    position: relative;
+    display: inline-block;
+}
+
+.stars-outer {
+    position: relative;
+    display: inline-block;
+    font-family: FontAwesome, sans-serif;
+    color: #ccc; /* Couleur des étoiles vides */
+    white-space: nowrap;
+}
+
+.stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    color: gold; /* Couleur des étoiles remplies */
+}
+
+.stars-outer::before,
+.stars-inner::before {
+    content: "★★★★★"; /* 5 étoiles */
+    font-size: 20px;
+}
+
+
+
+.review {
+    list-style: none;
+    border: 1px solid var(--color-secondary);            /* Bordure grise */
+    border-radius: 10px;               /* Coins arrondis */
+    padding: 15px 20px;                /* Espacement intérieur */
+    margin: 10px 0;                    /* Espacement entre les éléments */
+    background-color: var(--color-primary);         /* Fond clair */
+    width: fit-content;                /* Largeur selon le contenu */
+    transition: box-shadow 0.3s ease;  /* Animation légère au hover */
+}
+
+.review:hover {
+    box-shadow: 0 4px 12px var(--color-shade); /* Ombre au survol */
+}
+
+#user-data {
+    text-decoration: none;     /* Supprime le soulignement du lien */
+    color: var(--color-text);               /* Couleur du texte */
+    font-weight: bold;
+    display: block;            /* Permet de gérer le padding */
+}
+
+.review {
+    list-style: none;
+    padding: 10px;
+    border: 1px solid var(--color-secondary);
+    border-radius: 12px;
+    margin: 10px 0;
+    background-color: var(--color-primary);
+}
+
+.user-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Bloc 1 : photo + nom */
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+}
+
+.user-info img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-secondary);
+}
+
+.user-name {
+    margin-top: 5px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Ligne verticale */
+.vertical-line {
+    width: 1px;
+    height: 60px;
+    background-color: var(--color-background-text);
+}
+
+/* Bloc 2 : commentaire */
+.comment-content {
+    flex: 1;
+    font-size: 15px;
+    color: var(--color-text);
+
+    max-height: 80px;
+    overflow-y: auto;
+    padding-right: 5px;
+
+    max-width: 400px;   /* limite la largeur */
+    word-wrap: break-word; /* passe à la ligne quand trop long */
+}
+
+
+/* Bloc 3 : étoiles */
+.rating-block {
+    width: 110px;
+}
+
+.date {
+    font-size: 12px;         /* Plus petit */
+    color: (var(--color-text));
+    filter: brightness(120%);             /* Couleur plus claire */
+    margin-top: 5px;         /* Un petit espace au-dessus */
+    text-align: center;      /* Centrer sous les étoiles */
+}
+
+
+.star-rating {
+    position: relative;
+    display: inline-block;
+    cursor: default;
+}
+
+/* Tooltip au hover */
+.star-rating::after {
+    content: attr(data-rating) "/10"; /* Récupère la valeur de data-rating */
+    position: absolute;
+    bottom: 120%; /* au-dessus des étoiles */
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-background-text);
+    color: var(--color-text);
+    padding: 3px 6px;
+    font-size: 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* Petite flèche vers le bas */
+.star-rating::before {
+    content: "";
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: var(--color-secondary) transparent transparent transparent;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* Affiche au survol */
+.star-rating:hover::after,
+.star-rating:hover::before {
+    opacity: 1;
+}
+

@@ -1,0 +1,67 @@
+
+:root {
+    --color-primary: #712F79;
+    --color-secondary: #D64933;
+    --color-shade: #708d815e;
+    --color-text: #E8E9F3;
+}
+
+
+
+
+.audio_controller {
+    position: relative;
+    display: inline-block;
+}
+
+.audio_controller {
+
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px var(--color-shade);
+  
+  /* transition pour adoucir l’effet */
+  transition: box-shadow 0.3s ease;
+}
+
+.audio_controller:hover {
+  box-shadow: 0 8px 20px var(--color-shade);
+}
+
+.audio_controller img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: 20px;
+  
+  /* transition pour l’effet zoom */
+  transition: transform 0.3s ease;
+}
+
+.audio_controller:hover img {
+  transform: scale(1.05); /* zoom léger */
+}
+
+
+#audio_controller audio {
+  display: none;
+}
+
+#button-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  background: transparent;
+  border: 2px solid var(--color-text);
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.7;
+}
