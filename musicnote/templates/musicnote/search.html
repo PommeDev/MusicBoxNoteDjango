@@ -17,7 +17,7 @@
 
         if (query.length < 2) return;  // Attendre un peu pour éviter le spam
 
-        fetch(`/musicnote/search/?q=${encodeURIComponent(query)}`)
+        fetch(`/search/?q=${encodeURIComponent(query)}`)
             .then(response => response.json())
             .then(data => {
                 const resultsList = document.getElementById('results');

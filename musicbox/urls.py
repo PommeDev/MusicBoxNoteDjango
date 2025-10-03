@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path,include
 
 urlpatterns = [
-    path('musicnote/',include('musicnote.urls')),
+    path('',include('musicnote.urls')),
     path('admin/', admin.site.urls),
     
 ]

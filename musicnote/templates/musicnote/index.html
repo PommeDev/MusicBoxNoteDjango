@@ -67,7 +67,7 @@
                 return;
             }
 
-            fetch(`/musicnote/search/?q=${encodeURIComponent(query)}`)
+            fetch(`/search/?q=${encodeURIComponent(query)}`)
                 .then(response => {
                     if (!response.ok) throw new Error("Erreur réseau");
                     return response.json();
@@ -84,13 +84,13 @@
                         if (track.in_data_base){
                             const li = document.createElement('li');
                             li.innerHTML = `
-                                <a href="/musicnote/song/${track.id}"> <strong>${track.title}</strong> – ${track.artist.name}<br> </a>
+                                <a href="/song/${track.id}"> <strong>${track.title}</strong> – ${track.artist.name}<br> </a>
                             `;
                             resultsList.appendChild(li);
                         }else{
                             const li = document.createElement('li');
                             li.innerHTML = `
-                                <a href="/musicnote/add_deezer_song/${track.deezer_id}">
+                                <a href="/add_deezer_song/${track.deezer_id}">
                                 <strong>${track.title}</strong> – ${track.artist.name}
                                 </a>
                             `;
