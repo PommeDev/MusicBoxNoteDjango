@@ -239,7 +239,7 @@ def signup_view(request):
         if form.is_valid():
             user = form.save()  # crée l’utilisateur
             login(request, user)  # connecte directement après inscription
-            return redirect("musicnote:index")  # redirige vers l’accueil
+            return redirect(request.META.get('HTTP_REFERER', '/'))  # redirige vers l’accueil
     else:
         form = UserCreationForm()
     return render(request, "musicnote/signup.html", {"form": form})
@@ -251,7 +251,8 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect("musicnote:index")  # redirige vers la page d’accueil
+            next_url = request.GET.get('next') or request.POST.get('next') or '/'
+            return redirect(next_url)
     else:
         form = AuthenticationForm()
     return render(request, "musicnote/login.html", {"form": form})

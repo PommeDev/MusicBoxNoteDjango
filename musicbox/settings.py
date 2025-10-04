@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-from MusicBoxNoteDjango.secretKey import SECRET_KEY as SK
+from secretKey import SECRET_KEY as SK
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -80,6 +80,20 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+
+# DATABASES = {
+#    "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "musicboxdb",
+#         "USER": "musicboxuser",
+#         "PASSWORD": "Mon$y2212$$",
+#         "HOST": "localhost",
+#         "PORT": "5432",
+#     }
+# }
+
 
 
 # Password validation

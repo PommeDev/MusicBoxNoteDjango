@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{% static 'musicnote/basestyle.css' %}">
     <link rel="stylesheet" href="{% static 'musicnote/songstyle.css' %}">
     <link rel="stylesheet" href="{% static 'musicnote/Menu/style.css' %}">
+    <link rel="stylesheet" href="{% static 'musicnote/footer/style.css' %}">
 
     <title>{{ songData.name }}</title>
 </head>
@@ -168,7 +169,13 @@
                         <input type="range" name="note" min="0" max="10" step="1" value='5' oninput="this.nextElementSibling.value = this.value" required>    
                         <output>5</output>
                     </div>
-                    <button type="submit" >Post</button>
+                    {% if user.is_authenticated %}
+                        <button type="submit" >Post</button>
+                        
+                    {% else %}
+                        <a id="button-like" href="{% url 'musicnote:login' %}?next={{ request.path }}"><button type="button" onclick="">Connectez Vous</button></a>
+                    {% endif %}
+
 
                     </form>
 
@@ -291,6 +298,48 @@
 
     </div>
 
+
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="footer-brand">
+            <img src="logo.png" alt="Logo Votre Entreprise" class="footer-logo" />
+            <p class="footer-desc">Put a note to all musics</p>
+            </div>
+
+            <div class="footer-columns">
+            <div class="col">
+                <h3>À propos</h3>
+                <p></p>
+            </div>
+
+            <div class="col">
+                <h3>Liens utiles</h3>
+                <ul>
+                <li><a href="/about">À propos</a></li>
+                <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="col">
+                <h3>Contact</h3>
+                <ul class="contact-list">
+                <li>Email: <a href="mailto:tom.frachetdev@gmail.com">tom.frachetdev@gmail.com</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-bottom">
+            <div class="legal-links">
+                <a href="/privacy">Politique de confidentialité</a>
+                <a href="/terms">Conditions générales</a>
+                <a href="/cookies">Cookies</a>
+            </div>
+            <div class="copyright">
+                &copy; <span id="year"></span> Tom Frachet — Tous droits réservés.
+            </div>
+            </div>
+        </div>
+    </footer>
 
 
 
