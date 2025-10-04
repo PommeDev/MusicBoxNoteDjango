@@ -66,6 +66,19 @@ h3{
 }
 
 
+.indic-text{
+    display: flex;              /* active Flexbox */
+    justify-content: center;    /* centre horizontalement */
+    align-items: center;        /* centre verticalement */
+    text-align: center;         /* centre le texte à l’intérieur du <p> */
+
+    font-family: 'Arial', sans-serif;
+    font-size: 1.2rem;          /* taille du texte */
+    line-height: 1.5;           /* espace entre les lignes */
+
+}
+
+
 /* --- AUDIO CONTROLLER --- */
 
 

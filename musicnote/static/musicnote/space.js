@@ -30,7 +30,7 @@ window.addEventListener('mousemove', e => {
 });
 
 function animate() {
-    ctx.fillStyle = '#1E1E1E';
+    ctx.fillStyle = '#77b2b4ff';
     ctx.fillRect(0, 0, width, height);
 
     for (let note of notes) {

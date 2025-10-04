@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="{% static 'musicnote/stylemusic.css' %}">
     <link rel="stylesheet" href="{% static 'musicnote/userstyle.css' %}">
     <link rel="stylesheet" href="{% static 'musicnote/Menu/style.css' %}">
-    <title>{{ userData.username }}</title>
+    
+    <link rel="shortcut icon" href="{% static 'musicnote/favicon.ico' %}" type="image/ico">
+
+    <title>MusicBox:{{ userData.username }}</title>
 </head>
 <body>
     <canvas id="space-background"></canvas>

@@ -12,7 +12,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <link rel="stylesheet" href="{% static 'musicnote/sliderIndex/style.css' %}">
 
-    <title>Main Page</title>
+    <link rel="shortcut icon" href="{% static 'musicnote/favicon.ico' %}" type="image/ico">
+
+    <title>MusicBox</title>
 </head>
 <body>
 
@@ -44,13 +46,11 @@
     </header>
 
 
-    
+    <h1>Faites vibrer vos playlists !</h1>
 
-    <h1>Cherche un son</h1>
+    <p class="indic-text">Sur MusicBox, chaque morceau mérite sa note.<br> Donnez votre avis, découvrez les tendances et partagez vos coups de cœur musicaux !</p>    
 
-    <h1>---------------------------------------</h1>
-
-    <h1>Recherche de morceaux Deezer 🎵</h1>
+    <h2>Cherche ton morceau préféré</h2>
     <form>
     <input type="text" id="search" placeholder="Tape un nom de chanson ou artiste...">
     </form>
@@ -59,7 +59,7 @@
     </ul>
 
 
-
+    <h2>Les dernières note de la communauté</h2>
 
     <div class="splide" id="slider-1">
         <div class="splide__track">
@@ -82,6 +82,8 @@
         </div>
     </div>
 
+    {% if last_songs_2 %}
+
     <div class="splide" id="slider-2">
         <div class="splide__track">
             <ul class="splide__list">
@@ -101,6 +103,9 @@
             </ul>
         </div>
     </div>
+    
+    {% endif %}
+
 
 
 
