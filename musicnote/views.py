@@ -37,16 +37,8 @@ def user(request, user_id):
 
 
 def index(request):
-    tracks = []
-    name = request.POST.get("name", "")
-    if name:
-        try:
-            tracks = get_all_track_by_name(name)
-        except Exception:
-            tracks = []
-
     return render(
-        request, "musicnote/index.html", {"tracks": tracks, "request": request.user}
+        request, "musicnote/index.html", {"request": request.user}
     )
 
 

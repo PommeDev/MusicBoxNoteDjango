@@ -1,33 +1,3 @@
-:root {
-    /* Couleur principale (titres, boutons) */
-    --color-primary: #6C63FF;       /* violet moderne, doux et lumineux */
-
-    /* Couleur secondaire (accent, hover, boutons secondaires) */
-    --color-secondary: #FF6B6B;     /* rouge/orange vif mais élégant */
-
-    /* Couleur tierce (éléments secondaires, icons) */
-    --color-tierce: #4DB6AC;        /* vert/bleu pastel moderne */
-
-    /* Seconde tierce (alertes, accents subtils) */
-    --color-seco-tierce: #FFA500;   /* orange doux et moderne */
-
-    /* Ombres / overlays / transparences */
-    --color-shade: rgba(77,182,172,0.35); /* vert/bleu pastel translucide */
-
-    /* Fond principal */
-    --color-background: #121212;    /* très sombre, style moderne “dark mode” */
-
-    /* Texte principal */
-    --color-text: #E0E0E0;          /* gris clair pour lisibilité maximale */
-
-    /* Fond clair pour sections / containers */
-    --color-background-text: #1E1E1E; /* gris foncé, contraste doux avec le fond */
-    
-    /* Couleurs halo / audio */
-    --halo-main: var(--color-primary);
-    --halo-secondary: var(--color-secondary);
-    --halo-light: var(--color-text);
-}
 
 
 /* Header */
