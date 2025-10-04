@@ -59,7 +59,7 @@
     </ul>
 
 
-    <h2>Les dernières note de la communauté</h2>
+    <h2>Les dernières notes de la communauté</h2>
 
     <div class="splide" id="slider-1">
         <div class="splide__track">
@@ -71,7 +71,7 @@
                     <div class="slide-content">
                         <a href="{% url 'musicnote:song' review.song.id %}">
                             <img src="{{ review.song.cover }}" alt="Logo 1" />
-                            <p>{{review.song.name}}</p>
+                            <p><strong>{{review.song.name}}</strong></p>
                         </a>
                     </div>
                 </li>
@@ -93,7 +93,7 @@
                 <li class="splide__slide">
                     <div class="slide-content">
                         <img src="{{ review.song.cover }}" alt="Logo 1" />
-                        <p>{{review.song.name}}</p>
+                        <p><strong>{{review.song.name}}</strong></p>
                     </div>
                 </li>
 

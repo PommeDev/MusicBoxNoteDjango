@@ -34,8 +34,8 @@
 }
 
 .slide-content img {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
   margin-bottom: 10px;
 }
@@ -49,7 +49,9 @@
 .slide-content{
   border: 2px solid var(--color-secondary);   /* couleur et épaisseur de la bordure */
   border-radius: 12px;      /* coins arrondis */
-  padding: 20px;            /* espace intérieur */
+  padding: 10px;            /* espace intérieur */
   width: 200px;             /* largeur optionnelle */
   background-color: var(--color-primary); /* couleur de fond */
+  min-width: 150px;
+  max-width: 150px;
 }
