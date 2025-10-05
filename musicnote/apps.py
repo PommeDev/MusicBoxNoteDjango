@@ -1,10 +1,9 @@
+
 from django.apps import AppConfig
 
-
 class MusicnoteConfig(AppConfig):
-    default_auto_field = "django.db.models.BigAutoField"
-    name = "musicnote"
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'musicnote'
 
-
-def ready(self):
-    import accounts.signals
+    def ready(self):
+        import musicnote.signals
