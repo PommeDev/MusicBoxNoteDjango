@@ -1,51 +1,25 @@
+{% extends 'musicnote/base.html' %}
+    
+
 {% load static %}
 <!DOCTYPE html>
 
-
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'musicnote/basestyle.css' %}">
+{% block extra_css %}
     <link rel="stylesheet" href="{% static 'musicnote/searchstyle.css' %}">
-    <link rel="stylesheet" href="{% static 'musicnote/Menu/style.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <link rel="stylesheet" href="{% static 'musicnote/sliderIndex/style.css' %}">
+{% endblock extra_css %}
 
-    <link rel="shortcut icon" href="{% static 'musicnote/favicon.ico' %}" type="image/ico">
 
-    <title>MusicBox</title>
-</head>
-<body>
+{% block title %}MusicBox{% endblock title %}
 
+{% block canvas %}
     <canvas id="space-background"></canvas>
-
-    <header>
-        <div class="container">
-            <div class="logo">MusicNote</div>
-            <nav>
-            <ul class="nav-links">
-                <li><a href="{% url 'musicnote:home' %}">Accueil</a></li>
-                <li><a href="{% url 'musicnote:index' %}">Rechercher</a></li>
-                {% if user.is_authenticated %}
-                <li><a href="{% url 'musicnote:user' user.pk %}">Ma page</a></li>
-                <li><a href="{% url 'musicnote:logout' %}">Se déconnecter</a></li>
-                <li class="nav-user">{{ user }}</li>
-                {% else %}
-                <li><a href="{% url 'musicnote:login' %}">Se connecter</a></li>
-                {% endif %}
-            </ul>
-            <!-- Hamburger -->
-            <div id="nav-icon1">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            </nav>
-        </div>
-    </header>
+{% endblock canvas %}
 
 
+
+{% block content %}
     <h1>Faites vibrer vos playlists !</h1>
 
     <p class="indic-text">Sur MusicBox, chaque morceau mérite sa note.<br> Donnez votre avis, découvrez les tendances et partagez vos coups de cœur musicaux !</p>    
@@ -107,6 +81,10 @@
     {% endif %}
 
 
+    
+
+
+{% endblock content %}
 
 
 
@@ -118,9 +96,9 @@
 
 
 
+{% block extra_js %}
 
-
-    <script>
+<script>
         const searchInput = document.getElementById('search');
         const resultsList = document.getElementById('results');
 
@@ -168,25 +146,13 @@
                     resultsList.innerHTML = `<li class="no-result">Erreur : ${error.message}</li>`;
                 });
         });
-    </script>
+</script>
 
 
-    
-    <script src="{% static 'musicnote/space.js' %}"></script>
-    <script src="{% static 'musicnote/Menu/script.js' %}"></script>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-    <script src="{% static 'musicnote/sliderIndex/script.js' %}"></script>
+<script src="{% static 'musicnote/space.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+<script src="{% static 'musicnote/sliderIndex/script.js' %}"></script>
 
 
 
-
-
-
-
-
-
-
-</body>
-</html>
+{% endblock extra_js %}
