@@ -256,7 +256,7 @@ def signup_view(request):
         if form.is_valid():
             user = form.save()  # crée l’utilisateur
             login(request, user)  # connecte directement après inscription
-            return redirect(request.META.get('HTTP_REFERER', '/'))  # redirige vers l’accueil
+            return redirect('/')
     else:
         form = UserCreationForm()
     return render(request, "musicnote/signup.html", {"form": form})

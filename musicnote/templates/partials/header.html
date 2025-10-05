@@ -18,7 +18,7 @@
             <li><a href="{% url 'musicnote:logout' %}">Se déconnecter</a></li>
             <li class="nav-user">{{ user }}</li>
             {% else %}
-            <li><a href="{% url 'musicnote:login' %}">Se connecter</a></li>
+            <li><a href="{% url 'musicnote:login' %}?next={{ request.path }}">Se connecter</a></li>
             {% endif %}
         </ul>
         <!-- Hamburger -->
