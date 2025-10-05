@@ -72,7 +72,8 @@
                                 <!-- Bloc 1 : Photo + Nom -->
                                 <a href={% url 'musicnote:user' user_review.user.id %}>
                                     <div class="user-info">
-                                        <img src="{{user.profile.profile_picture.url}}" alt="Photo de profil">
+                                        <img src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{% static 'profile_pics/default.png' %}{% endif %}" alt="Photo de profil">
+
                                         <div class="user-name">{{ user_review.user.username }}</div>
                                     </div>
                                 </a>
@@ -168,7 +169,8 @@
                             <!-- Bloc 1 : Photo + Nom -->
                             <a href={% url 'musicnote:user' review.user.id %}>
                                 <div class="user-info">
-                                    <img src="{{user.profile.profile_picture.url}}" alt="Photo de profil">
+                                    <img src="{% if review.user.profile.profile_picture %}{{ review.user.profile.profile_picture.url }}{% else %}{% static 'profile_pics/default.png' %}{% endif %}" alt="Photo de profil">
+
                                     <div class="user-name">{{ review.user.username }}</div>
                                 </div>
                             </a>
@@ -212,7 +214,8 @@
                             <!-- Bloc 1 : Photo + Nom -->
                             <a href={% url 'musicnote:user' review.user.id %}>
                                 <div class="user-info">
-                                    <img src="{{user.profile.profile_picture.url}}" alt="Photo de profil">
+                                    <img src="{% if review.user.profile.profile_picture %}{{ review.user.profile.profile_picture.url }}{% else %}{% static 'profile_pics/default.png' %}{% endif %}" alt="Photo de profil">
+
                                     <div class="user-name">{{ review.user.username }}</div>
                                 </div>
                             </a>

@@ -18,3 +18,4 @@ async function fetchData() {
         loader.style.display = 'none'; // cache le loader
     }
 }
+

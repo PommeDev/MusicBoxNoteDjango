@@ -25,15 +25,88 @@
         
 
     {% if  is_owner %}
-    <h1>Bravo c'est ta page</h1>
+        <div class="user-data">
+            <div class="user-header">
+                <div class="profile-upload">
+                    <img id="profile-pic" src="{% if user.profile.profile_picture %}{{ user.profile.profile_picture.url }}{% else %}{% static 'profile_pics/default.png' %}{% endif %}" alt="Photo de profil" style="cursor:pointer; width:100px; height:100px; border-radius:50%;">
+                    <input type="file" id="file-input" accept="image/*" style="display:none;">
+                </div>
+
+                <h1 id="user-name">{{ userData.username }}</h1>
+                <p>Membre depuis : {{user.date_joined}}</p>
+                <p>Nombre de review : {{nombre_reviews}}</p>
+            </div>
+
+            <form id="user-bio-2" action="" method="post">
+                {% csrf_token %}
+                <input type="text" name="bio" value="{{ user.profile.bio }}" required>
+                <button type="submit">Modifier</button>
+            </form>
+        </div>
+
+
+
+
+
+        <script>
+
+
+            const profilePic = document.getElementById('profile-pic');
+            const fileInput = document.getElementById('file-input');
+
+            profilePic.addEventListener('click', () => fileInput.click());
+
+            fileInput.addEventListener('change', () => {
+                const file = fileInput.files[0];
+                if (!file) return;
+
+                const formData = new FormData();
+                formData.append('profile_picture', file);
+                formData.append('csrfmiddlewaretoken', '{{ csrf_token }}');
+
+                fetch("{% url 'musicnote:update_profile' %}", {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.success) {
+                        profilePic.src = data.url;  // mise à jour de l'image
+                    } else {
+                        alert('Erreur lors de l’upload');
+                    }
+                })
+                .catch(err => console.error(err));
+            });
+
+
+
+        </script>
+
+
+
+
+
+
+    {% else %}
+        <div class="user-data">
+            <div class="user-header">
+                <img src="{{ userData.profile.profile_picture.url }}" alt="Photo de profil" id="user-pic">
+                <h1 id="user-name">{{ userData.username }}</h1>
+                <p>Membre depuis : {{user.date_joined}}</p>
+                <p>Nombre de review : {{nombre_reviews}}</p>
+            </div>
+            <p id="user-bio">{{ userData.profile.bio }}</p>
+        </div>
+
     {% endif %}
 
 
-    <h1>{{ userData.username }}</h1>
 
-    <img src="{{ userData.profile.profile_picture.url}}" alt="Photo de profile">
 
-    <p>{{userData.profile.bio}}</p>
+
+
+    <hr class="user-separator">
 
     <h2>Reviews</h2>
 

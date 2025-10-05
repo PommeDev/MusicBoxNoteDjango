@@ -14,6 +14,7 @@ from django.db.models import Avg
 from django.utils import timezone
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, logout
+from .forms import *
 
 import requests
 
@@ -25,6 +26,25 @@ def user(request, user_id):
         track_id = review.song.deezer_id  # Supposons que song = id_deezer (int ou str)
         review.song.preview = get_preview(track_id)
 
+
+    if request.method == "POST":
+        bio = request.POST.get("bio","").strip()
+
+        try:
+            user = request.user
+            user.profile.bio = bio
+            user.profile.save()
+
+        except IntegrityError:
+            from django.contrib import messages
+
+            messages.error(
+                request, "Vous avez déjà posté une review pour cette chanson."
+            )
+            return redirect(request.path)
+
+
+
     return render(
         request,
         "musicnote/user.html",
@@ -32,6 +52,7 @@ def user(request, user_id):
             "userData": userData,
             "reviews": list_reviews,
             "is_owner": userData == request.user,
+            "nombre_reviews": len(list_reviews),
         },
     )
 
@@ -281,3 +302,20 @@ def audio_proxy(request, song_id):
     resp["Accept-Ranges"] = "bytes"
 
     return resp
+
+
+def update_profile(request):
+    profile = request.user.profile
+    if request.method == 'POST' and request.FILES.get('profile_picture'):
+        new_pic = request.FILES['profile_picture']
+
+        # supprimer l'ancienne si ce n'est pas la default
+        if profile.profile_picture and profile.profile_picture.name != 'profile_pics/default.png':
+            profile.profile_picture.delete(save=False)
+
+        profile.profile_picture = new_pic
+        profile.save()
+
+        return JsonResponse({'success': True, 'url': profile.profile_picture.url})
+
+    return JsonResponse({'success': False})

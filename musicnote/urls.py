@@ -16,5 +16,6 @@ urlpatterns = [
     path("signup/", views.signup_view, name="signup"),
     path("", views.index, name="home"),
     path("audio/<int:song_id>", views.audio_proxy, name="audio_proxy"),
+    path("update_profile",views.update_profile,name="update_profile"),
 ]
 

@@ -61,5 +61,104 @@
     100% { transform: rotate(360deg); }
 }
 
+.user-data {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--color-background);
+    border: 2px solid var(--color-secondary);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);     /* fond semi-transparent léger */
+    backdrop-filter: blur(12px);               /* flou du fond */
+    -webkit-backdrop-filter: blur(12px);       /* compatibilité Safari */
+}
+
+/* Conteneur photo + nom */
+.user-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Photo en cercle */
+#user-pic {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--color-secondary);
+}
+
+/* Nom utilisateur */
+#user-name {
+    font-size: 1.8rem;
+    margin: 0;
+}
+
+/* Bio */
+#user-bio {
+    background-color: var(--color-seco-tierce);
+    padding: 15px;
+    border-radius: 12px;
+    white-space: pre-line; /* conserve les retours à la ligne */
+    line-height: 1.5;
+    font-size: 1rem;
+    color: var(--color-text);
+}
+
+/* Effet hover léger */
+#user-bio:hover {
+    background-color: var(--color-tierce);
+    transition: background-color 0.3s ease;
+}
 
 
+.user-separator {
+    border: none;
+    height: 3px;
+    background: linear-gradient(to right, #4facfe, #00f2fe);
+    margin: 30px 0;
+    border-radius: 3px;
+}
+
+
+#user-bio-2{
+    all:unser;
+    all:initial;
+}
+
+
+#user-bio-2 input{
+    background-color: var(--color-seco-tierce);
+    padding: 15px;
+    border-radius: 12px;
+    white-space: pre-line; /* conserve les retours à la ligne */
+    line-height: 1.5;
+    font-size: 1rem;
+    color: var(--color-text);
+}
+
+/* Effet hover léger */
+#user-bio-2:hover input:hover{
+    background-color: var(--color-tierce);
+    transition: background-color 0.3s ease;
+}
+
+
+.profile-upload img {
+    cursor: pointer;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    transition: transform 0.2s;
+}
+
+.profile-upload img:hover {
+    transform: scale(1.05);
+}
