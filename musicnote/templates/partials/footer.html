@@ -1,0 +1,51 @@
+{% load static %}
+
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static "musicnote/footer/style.css" %}">
+{% endblock %}
+
+<footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+        <div class="footer-brand">
+        <img src="logo.png" alt="Logo Votre Entreprise" class="footer-logo" />
+        <p class="footer-desc">Put a note to all musics</p>
+        </div>
+
+        <div class="footer-columns">
+        <div class="col">
+            <h3>À propos</h3>
+            <p></p>
+        </div>
+
+        <div class="col">
+            <h3>Liens utiles</h3>
+            <ul>
+            <li><a href="/about">À propos</a></li>
+            <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+
+        <div class="col">
+            <h3>Contact</h3>
+            <ul class="contact-list">
+            <li>Email: <a href="mailto:tom.frachetdev@gmail.com">tom.frachetdev@gmail.com</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-bottom">
+        <div class="legal-links">
+            <a href="/privacy">Politique de confidentialité</a>
+            <a href="/terms">Conditions générales</a>
+            <a href="/cookies">Cookies</a>
+        </div>
+        <div class="copyright">
+            &copy; <span id="year"></span> Tom Frachet — Tous droits réservés.
+        </div>
+        </div>
+    </div>
+</footer>
+
+
+{% block extra_js %}
+{% endblock %}

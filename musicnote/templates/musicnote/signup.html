@@ -1,40 +1,20 @@
+{% extends 'musicnote/base.html' %}
+
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-    <title>MusicBox:Inscription</title>
-    <link rel="stylesheet" href="{% static 'musicnote/Menu/style.css' %}">
-    <link rel="stylesheet" href="{% static 'musicnote/LoginSignup/style.css' %}">
-    <link rel="shortcut icon" href="{% static 'musicnote/favicon.ico' %}" type="image/ico">
 
-</head>
-<body>
 
-<header>
-        <div class="container">
-            <div class="logo">MusicNote</div>
-            <nav>
-            <ul class="nav-links">
-                <li><a href="{% url 'musicnote:home' %}">Accueil</a></li>
-                <li><a href="{% url 'musicnote:index' %}">Rechercher</a></li>
-                {% if user.is_authenticated %}
-                <li><a href="{% url 'musicnote:user' user.pk %}">Ma page</a></li>
-                <li><a href="{% url 'musicnote:logout' %}">Se déconnecter</a></li>
-                <li class="nav-user">{{ user }}</li>
-                {% else %}
-                <li><a href="{% url 'musicnote:login' %}">Se connecter</a></li>
-                {% endif %}
-            </ul>
-            <!-- Hamburger -->
-            <div id="nav-icon1">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            </nav>
-        </div>
-    </header>
+{% block title %}
+MusicBox:Inscription
+{% endblock title %}
 
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'musicnote/LoginSignup/style.css' %}">
+{% endblock extra_css %}
+
+
+{% block content %}
     <div class="form-back">
         <h2>Créer un compte</h2>
         <form method="post">
@@ -44,8 +24,5 @@
         </form>
         <p class="signup-text">Déjà un compte ? <a href="{% url 'musicnote:login' %}">Se connecter</a></p>
     </div>
-    
-    <script src="{% static 'musicnote/Menu/script.js' %}"></script>
+{% endblock content %}
 
-</body>
-</html>
