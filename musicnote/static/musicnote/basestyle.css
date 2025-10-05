@@ -214,3 +214,14 @@ a{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+
+
+.part-separator {
+    border: none;
+    height: 3px;
+    background: linear-gradient(to right, var(--color-primary), var(--color-tierce));
+    margin: 10px 0;
+    border-radius: 3px;
+    z-index: 100;
+}

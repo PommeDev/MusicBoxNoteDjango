@@ -2,9 +2,8 @@
 
 
 /* Centrer le contenu */
-body {
+.content-s {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--color-tierce);
     color: var(--color-text);
     display: flex;
     flex-direction: column;
