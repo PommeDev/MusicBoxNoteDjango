@@ -17,3 +17,4 @@ urlpatterns = [
     path("", views.index, name="home"),
     path("audio/<int:song_id>", views.audio_proxy, name="audio_proxy"),
 ]
+

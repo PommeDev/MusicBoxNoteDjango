@@ -45,3 +45,12 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.user} : {self.song}"
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True,default='profile_pics/default.png')
+    bio = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Profil de {self.user.username}"

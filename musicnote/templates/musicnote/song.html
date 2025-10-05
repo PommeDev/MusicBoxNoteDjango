@@ -72,7 +72,7 @@
                                 <!-- Bloc 1 : Photo + Nom -->
                                 <a href={% url 'musicnote:user' user_review.user.id %}>
                                     <div class="user-info">
-                                        <img src="{% static "musicnote/profile.png" %}" alt="Photo de profil">
+                                        <img src="{{user.profile.profile_picture.url}}" alt="Photo de profil">
                                         <div class="user-name">{{ user_review.user.username }}</div>
                                     </div>
                                 </a>
@@ -168,7 +168,7 @@
                             <!-- Bloc 1 : Photo + Nom -->
                             <a href={% url 'musicnote:user' review.user.id %}>
                                 <div class="user-info">
-                                    <img src="{% static "musicnote/profile.png" %}" alt="Photo de profil">
+                                    <img src="{{user.profile.profile_picture.url}}" alt="Photo de profil">
                                     <div class="user-name">{{ review.user.username }}</div>
                                 </div>
                             </a>
@@ -212,7 +212,7 @@
                             <!-- Bloc 1 : Photo + Nom -->
                             <a href={% url 'musicnote:user' review.user.id %}>
                                 <div class="user-info">
-                                    <img src="{% static "musicnote/profile.png" %}" alt="Photo de profil">
+                                    <img src="{{user.profile.profile_picture.url}}" alt="Photo de profil">
                                     <div class="user-name">{{ review.user.username }}</div>
                                 </div>
                             </a>
