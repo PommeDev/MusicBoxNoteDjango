@@ -124,3 +124,35 @@
     z-index: -1; /* entre background et contenu */
 }
 
+
+
+.audio-player-wrapper {
+    transition: all 0.3s ease-in-out;
+}
+
+/* État normal (haut de page) */
+.audio-player-wrapper.static {
+    position: relative;
+    right: auto;
+    top: auto;
+}
+
+/* État “sticky” (quand on scrolle) */
+.audio-player-wrapper.fixed {
+    position: fixed;
+    top: 20px; /* distance depuis le haut */
+    right: 20px; /* distance depuis la droite */
+    z-index: 1000;
+    background-color: rgba(20, 20, 20, 0.9);
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    width: 220px;
+}
+
+/* Ajuste la taille de la cover */
+.audio-player-wrapper.fixed #cover-image {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}

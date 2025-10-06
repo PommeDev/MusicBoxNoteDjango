@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let compColor = "rgb(255,255,255)"; // valeur par défaut
     let audioCtx, analyser, dataArray, sourceNode;
+    let is_sticky = true;
 
     // 1️⃣ Fonction : calcul couleur moyenne + complémentaire
     function getAverageColor(imgElement) {
@@ -94,21 +95,33 @@ document.addEventListener("DOMContentLoaded", function() {
             analyser.connect(audioCtx.destination);
         }
 
+
         button.addEventListener("click", async () => {
-            setupAudio();
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioCtx.createAnalyser();
+                analyser.fftSize = 256;
+                dataArray = new Uint8Array(analyser.frequencyBinCount);
+                sourceNode = audioCtx.createMediaElementSource(audioEl);
+                sourceNode.connect(analyser);
+                analyser.connect(audioCtx.destination);
+            }
+
             await audioCtx.resume();
+
             if (audioEl.paused) {
-                try {
+                try { 
                     await audioEl.play();
                     iconPlay2.style.display = "none";
                     iconPause2.style.display = "inline";
-                } catch(e) {
-                    console.error("Erreur play:", e);
                 }
-            } else {
-                audioEl.pause();
-                iconPlay2.style.display = "inline";
-                iconPause2.style.display = "none";
+                catch(e) { 
+                    console.error("Erreur play:", e); }
+            } 
+            else { 
+                audioEl.pause(); 
+                iconPlay2.style.display = 'inline';
+                iconPause2.style.display = 'none';
             }
         });
 
@@ -118,6 +131,13 @@ document.addEventListener("DOMContentLoaded", function() {
         });
 
         function updateBorder() {
+
+            if (!is_sticky) {
+                container.style.boxShadow = "none";
+                requestAnimationFrame(updateBorder);
+                return;
+            }
+
             if (analyser) {
                 analyser.getByteFrequencyData(dataArray);
                 let level = dataArray.reduce((a,b) => a+b, 0) / dataArray.length;
@@ -157,6 +177,24 @@ img.addEventListener('load', function() {
     if (img.complete) {
         img.dispatchEvent(new Event('load'));
     }
+
+
+    const player = document.getElementById("sticky-player");
+    const triggerPoint = player.offsetTop + 150; // moment où le lecteur devient fixe
+
+    window.addEventListener("scroll", function() {
+        if (window.scrollY > triggerPoint) {
+            is_sticky = false;
+            player.classList.add("fixed");
+            player.classList.remove("static");
+        } else {
+            player.classList.remove("fixed");
+            player.classList.add("static");
+            is_sticky = true;
+        }
+    });
+
+
 
 });
 

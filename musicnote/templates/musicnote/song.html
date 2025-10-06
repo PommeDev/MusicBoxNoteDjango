@@ -24,23 +24,25 @@
 
 
             <div class="audio-section-wrapper">
-                <div class="audio_controller" id="audio-section">
-                    <img id='cover-image' src="{{ songData.cover}}" alt="" crossOrigin="anonymous">
-                    <audio id="my-audio">
-                    <source src="{% url 'musicnote:audio_proxy' id %}" type="audio/mpeg">
-                    </audio>
-                    <button id="button-play" aria-label="Play/Pause">
-                    <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="40" height="40">
-                                <polygon points="6,4 20,12 6,20" />
-                    </svg>
-                    <!-- SVG Pause (2 barres), caché par défaut -->
-                    <svg id="icon-pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="40" height="40" style="display:none;">
-                        <rect x="6" y="4" width="4" height="16" />
-                        <rect x="14" y="4" width="4" height="16" />
-                    </svg>
+                <div class="audio-player-wrapper" id="sticky-player">
+                    <div class="audio_controller" id="audio-section">
+                        <img id='cover-image' src="{{ songData.cover}}" alt="" crossOrigin="anonymous">
+                        <audio id="my-audio">
+                        <source src="{% url 'musicnote:audio_proxy' id %}" type="audio/mpeg">
+                        </audio>
+                        <button id="button-play" aria-label="Play/Pause">
+                        <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="40" height="40">
+                                    <polygon points="6,4 20,12 6,20" />
+                        </svg>
+                        <!-- SVG Pause (2 barres), caché par défaut -->
+                        <svg id="icon-pause" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="40" height="40" style="display:none;">
+                            <rect x="6" y="4" width="4" height="16" />
+                            <rect x="14" y="4" width="4" height="16" />
+                        </svg>
 
-                    </button>
+                        </button>
 
+                    </div>
                 </div>
 
                 <div class="audio_info">
@@ -273,9 +275,9 @@
             document.getElementById('page-content').style.display = 'block';
         });
 
-
-
     </script>
+
+
     <script src="{% static 'musicnote/scriptreview.js' %}"></script>
     <script src="{% static 'musicnote/scriptmusic.js' %}"></script>
     <script src="{% static 'musicnote/songscript.js' %}"></script>

@@ -25,19 +25,21 @@
 
     <!-- Contenu de la page -->
 
-        {% include 'partials/header.html' %}
+        <div class="page-wrapper">
+            {% include 'partials/header.html' %}
 
-        <!-- Contenu spécifique à chaque page -->
-        {% block content %}
-        {% endblock %}
+            <main>
+            <!-- Contenu spécifique à chaque page -->
+            {% block content %}
+            {% endblock %}
+            </main>
+
+            <hr class="part-separator">
 
 
-        <hr class="part-separator">
-
-
-        <!-- Footer commun -->
-        {% include 'partials/footer.html' %}
-
+            <!-- Footer commun -->
+            {% include 'partials/footer.html' %}
+        </div>
 
     <script>
         window.addEventListener('load', function() {

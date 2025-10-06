@@ -50,8 +50,8 @@
   border: 2px solid var(--color-secondary);   /* couleur et épaisseur de la bordure */
   border-radius: 12px;      /* coins arrondis */
   padding: 10px;            /* espace intérieur */
-  width: 200px;             /* largeur optionnelle */
+  width: 170px;             /* largeur optionnelle */
   background-color: var(--color-primary); /* couleur de fond */
-  min-width: 150px;
-  max-width: 150px;
+  min-width: 120px;
+  max-width: 120px;
 }
