@@ -6,7 +6,7 @@
 }
 
 .splide {
-  width: 48%;
+  width: 100%;
   background: var(--color-tierce);
   border-radius: 10px;
   overflow: hidden;

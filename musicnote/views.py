@@ -60,7 +60,7 @@ def user(request, user_id):
 def index(request):
 
 
-    last_songs = Review.objects.order_by('created_at')[:10]
+    last_songs = Review.objects.order_by('created_at')[:100]
 
     return render(
         request, "musicnote/index.html", {"request": request.user, "last_songs_1": last_songs[:(len(last_songs )-1//2)], "last_songs_2": last_songs[(len(last_songs )-1//2):]}
